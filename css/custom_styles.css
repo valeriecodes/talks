@@ -1,0 +1,20 @@
+.twitter-handle{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 100;
+}
+.reveal.slide section img {
+  border: 0px;
+  box-shadow: none;
+}
+.attribution {
+  width: 75%;
+  float: right;
+  font-size: .75em !important;
+  text-align: right;
+}
+
+.fragment.visible.disappear{
+  display: none;
+}
