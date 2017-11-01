@@ -25,8 +25,8 @@
 	<body>
 		<div class='reveal'>
 			<div class='slides'>
-				<section>
-					<h1>How I Learned to Stop Worrying and Love Unit Testing</h1>
+				<section data-background='images/kermit_bike.gif'>
+					<h2 style='color:#fff'>How I Learned to Stop Worrying and Love Unit Testing</h2>
 					<aside class='notes'>
 						Hello and welcome to my talk on unit testing. I'm Valerie Woolard
 						Srinivasan, I'm a software engineer at Panoply, where I help build
@@ -55,6 +55,8 @@
 						a test fails, you should have some proof or paper trail of when that
 						thing used to work so that you have an easier time identifying what
 						broke it.
+						Use tests to prove that your code does what you say it does when you
+						write it.
 						Ideally, you use a continous integration proccess to test your code
 						every time there is a new commit. Good tests coupled with continuous
 						integration will allow you to pinpoint and quickly correct any code
@@ -65,47 +67,80 @@
 					<h3>Documentation</h3>
 					<span class="fragment fade-in">
 						<span class="fragment fade-out disappear">
-						<pre><code>
+							<pre><code>
 def number
  # always returns 4
  4
 end
-					</code></pre>
-				</span>
-			</span>
-			<span class="fragment fade-in">
-				<pre><code>
+							</code></pre>
+						</span>
+					</span>
+					<span class="fragment fade-in">
+						<pre><code>
 def number
  # always returns 4
  5
 end
-				</code></pre>
-			</span>
-			<span class="fragment fade-in">
-				<pre><code>
+						</code></pre>
+					</span>
+					<span class="fragment fade-in">
+						<pre><code>
 it 'always returns 4' do
  expect(number).to eq(4)
 end
-				</code></pre>
-			</span>
-			<aside class='notes'>
-				If you're using continuous integration, tests have to be updated
-				when they fail, so they are more likely to reflect the current
-				state of the codebase than comments.
-				Good tests can serve as an introduction to your code.
-			</aside>
+						</code></pre>
+					</span>
+					<aside class='notes'>
+						If you're using continuous integration, tests have to be updated
+						when they fail, so they are more likely to reflect the current
+						state of the codebase than comments.
+						In the above example, nothing forces the comment to be updated when the
+						output of the function is actually switched to five. In a less trivial
+						case, this could lead to comments giving future developers (including
+						yourself!) misleading information about the actual state of the code.
+						Good tests can serve as an introduction to your code. Well-written tests,
+						along with well-named functions and variables,should explain the
+						desired behavior of your code as well as testing
+					</aside>
 				</section>
 				<section>
 					<h3>Encouraging good practices</h3>
 					<blockquote>Tests are the canary in the coal mine; when the design is bad, testing is hard.</blockquote>
 					<span class="attribution">— Sandi Metz, <em>Practical Object-Oriented Design in Ruby</em></span>
+					<aside class='notes'>
+						Writing tests as you write your code will help give you an idea of
+						where the complexities in your code are. If you are not sure how to
+						test a method, that method might be too complex and need to be
+						broken up into smaller functionality.
+						If you find yourself having to write lots of scaffolding in order
+						to even run your tests, this can help to signal that the class you're
+						working with might have too many external dependencies.
+						The Law of Demeter in object oriented programming states that each
+						unit should only have limited knowledge of other units, and that a
+						unit should only talk to its immediate friends. Writing unit tests
+						provides a great opportunity to test this. How much does your class
+						actually need from neighboring classes? If it's too much, then writing
+						unit tests will be more complicated.
+					</aside>
 				</section>
 				<section>
 					<h3>Allowing for confidence in refactor</h3>
-					<!-- TODO: Examples -->
+					<img src='images/dangerously.jpg'>
+					<aside class='notes'>
+						Without tests, it's impossible to make changes to your code and
+						ensure that you haven't broken other things. Efficient refactoring
+						is only possible with a well-written test suite.
+						This is an example of how taking the time to write good tests will
+						save you time in the future.
+					</aside>
 				</section>
 				<section>
 					<h2>What makes testing hard?</h2>
+					<aside class='notes'>
+						So we've talked about what's good about tests and why you should write
+						them, but we've probably all been or will be in situations where
+						test-writing is skipped or overlooked. Why is that?
+					</aside>
 				</section>
 				<section>
 					<h3>Time</h3>
@@ -114,33 +149,128 @@ end
 						<li>Computational time</li>
 						<li>The passage of time</li>
 					</ul>
+					<aside class='notes'>
+						Writing tests takes time. The first time you're writing something,
+						you're probably testing it manually in a development environment.
+						You've already convinced yourself that it works, and it seems
+						straightforward enough. Why write automated tests? That takes time
+						that you could be spending writing your next feature.
+
+						Tests also take time to run. By configuring a continous deployment
+						environment in which you have to run tests before you deploy new code,
+						in one deliberate way you are slowing down your deploy process. This
+						can make it more frustrating to push urgent fixes through, especially
+						if those tests take a long time to run or have spurious failures.
+
+						Testing anything that involves time can also be challenging. What
+						if you want to check that a time stamp was correctly recorded, but
+						fractions of a second elapse between the time the object is saved and
+						the test is run? What if your test server is on a different time
+						zone than your development and production environments?
+
+						These issues can be mitigated by using gems like Timecop, which
+						allow you to freeze time in your testing environment.
+
+						The final aspect of time that can be difficult is knowing at what
+						point in the process to write your tests, and if you're waiting to
+						write them until the end or trying to write them long after writing
+						the code under test, it can be hard to remember what you were doing
+						an what things are most important to test.
+
+						Even if you're not using true test-driven development, you should be
+						writing tests alongside your code, and writing out an idea of what
+						you want your tests to look like before you begin writing code can be
+						a helpful exercise in thinking about how to structure your code.
+					</aside>
 				</section>
 				<section>
 					<h3>Not knowing where to start</h3>
-					<!-- TODO: Examples, tools -->
+					<aside class='notes'>
+						If you're faced with an app or codebase with no tests, it's daunting
+						to try and figure out where to even start testing it.
+						Instead of taking on the monumental task of writing tons of tests
+						at once, instead make sure that every new piece of code that you add
+						is well-tested. Choose a testing framework and use tools to get an
+						idea of your test coverage. Chip away at it. Use the Boy Scout rule
+						and leave the code cleaner and better-tested than you found it with
+						every pull request.
+					</aside>
 				</section>
 				<section>
 					<h3>External systems</h3>
-					<!-- TODO: Examples, tools -->
+					<aside class='notes'>
+						Let's say that your code makes a call to an external API and then
+						parses that response. It's inefficient and clunky to actually make
+						that call every time you run your test, so what can you do?
+						You have a few options. You can mock out a valid response in your
+						tests and just make sure that you are doing the correct operations
+						on it.
+						You can use a tool like Webmock to construct fake HTTP responses,
+						or a tool like VCR to make a real request once and record the result,
+						performing all future tests from the recording.
+						Keep in mind that both of these methods rely on the current state or
+						your interpretation of the current state of the API response format,
+						and that if that changes it may break your live app but not your tests.
+					</aside>
 				</section>
-				<section>
+				<!-- <section>
 					<h3>Interdependence</h3>
-					<!-- TODO: Examples, tools -->
-				</section>
+					<aside class='notes'>As we discussed b</aside>
+				</section> -->
 				<section>
-					<h3>Browsers</h3>
-					<!-- TODO: Examples -->
-				</section>
-				<section>
-					<h3>Things that change a lot</h3>
-					<!-- TODO: Examples -->
+					<h2>A Good Test Suite</h2>
+					<ul>
+						<li>Fails when something is broken</li>
+						<li>Doesn't fail otherwise</li>
+					</ul>
+					<aside class='notes'>
+						A good test suite really only has to do two things. It needs to
+						break when code that you've changed has broken your app, and not
+						break otherwise. Both of these things are much easier said than
+						done. As it turns out, it's very difficult to predict what parts
+						of an application are most likely to break with future changes,
+						and write tests in a way that exposes those changes.
+						It's also quite easy to write tests that break in ways that don't
+						actually indicate failures in your code, like a copy change or a
+						change in the formatting of an output. You should also be wary of
+						tests that might be prone to timeout or assume anything that could
+						change, such as the year or anything about the environment it's
+						being run in.
+						</table>
+					</aside>
 				</section>
 				<section>
 					<h2>Different types of tests</h2>
 					<ul>
 						<li>Unit</li>
 						<li>Integration</li>
-						<!-- TODO: Maybe more? Research -->
+						<li>Functional</li>
+						<li>System</li>
+						<aside class='notes'>
+							So this talk is about unit testing, but we haven't really
+							differentiated the different types of tests and what they mean.
+							You'll hear slightly different definitions from different sources.
+							These different designations are used in the Ruby on Rails guides.
+
+							A unit test tests the smallest functional unit of code that it can,
+							such as a single method of a single class.
+
+							An integration test tests aspects of a particular workflow, and
+							thus tests multiple modules and units of your software at once.
+							You might create an integration test to make sure that users can
+							log in or create accounts.
+
+							Functional tests look at controller logic and interactions. They
+							are testing that your application handles and responds to requests
+							correctly.
+
+							System tests allows test user interactions with your application,
+							running tests in either a real or a headless browser.
+
+							System tests are like an automated QA script, and probably most
+							closely mirror the way you would perform manual QA in an automated
+							environment.
+						</aside>
 					</ul>
 				</section>
 				<section>
@@ -151,12 +281,32 @@ end
 						<li>Easy to reason about</li>
 						<li>Encourage simplicity</li>
 					</ul>
+					<aside class="notes">
+						Of the types of tests I talked about, you'll notice that unit tests
+						are by far the simplest.
+						I like them because they are easy to write, easy to run, easy to
+						reason about, and also help to encourage modularity and cleaniness
+						in your code as we discussed earlier.
+
+						Individual methods are probably the things in your code that you
+						have the best understanding of, making them the easiest to write
+						good tests for. And if your code is clean and modular, well-tested
+						units should lead to a functional application.
+
+						Unit tests are also very fast to run, since they have the fewest
+						dependencies and don't require spinning up a headless browser.
+					</aside>
 				</section>
 				<section>
-					<h2>When to write integration tests</h2>
-				</section>
-				<section>
-					<h1>What now?<h1>
+					<h2>When to write other tests</h2>
+					<aside class="notes">
+						That said, there will be times when you have to write other types of
+						tests, but you should be thoughtful about when those times are because
+						of the overhead involved. It's probably a good idea to have integration
+						tests for the most critical workflows in your app, or in the case of a
+						company, the things that would be most likely to loose you money quickly
+						if they broke.
+					</aside>
 				</section>
 				<section>
 					<h1>Questions?</h1>
