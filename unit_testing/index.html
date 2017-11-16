@@ -36,10 +36,12 @@
 						Before we get into the talk, I also want to take a moment to
 						appreciate our location in the beautiful city of New Orleans and to
 						borrow an Austrialian tradition called the acknowledgement of country,
+						which is something I first saw Pat Allen do at Nation Ruby, to
+						acknowledge the native people who first lived on this land.
 						I take time to acknowledge the Choctaw, Houma, and other tribes, the
-						traditional custodians of this land and pay respects to their elders
+						traditional custodians of this land, and pay respects to their elders
 						past and present, and I extend that respect to other indigenous people
-						who are present.
+						who are present.   (BREATHE)
 						Thank you for taking the time to appreciate their contributions to
 						this land and this culture with me, and for coming to attend this talk.
 						Let's get started.
@@ -74,6 +76,36 @@
 						assumptions may not hold true, and you have to figure out where the
 						gaps are between your understanding and reality.
 						Tests help bridge that gap.
+					</aside>
+				</section>
+				<section>
+					<h2>Who are tests for?</h2>
+					<blockquote>
+						To all viewers but yourself, what matters is the product: the finished artwork. To you, and you alone, what matters is the process
+					</blockquote>
+					<span class="attribution">— David Bayles & Ted Orland, <em>Art & Fear</em></span>
+					<aside class='notes'>
+						Let's also take a moment to talk about who your tests are for.
+						There's a bit of a story behind this quote. My parents are both in the art
+						world, and got me this book written by a friend of theirs about being
+						a professional artist. I'm pretty sure they were hoping I'd be a
+						professional artist. I'm not. But I really love this book, called
+						Art & Fear, because I think that it's incredbily relevant to
+						programming and all sorts of creative work.
+						I'm really obsessed with it, and this will not be that last time I
+						quote it in this talk.
+						"To all viewers but yourself, what matters is the product: The
+						finished artwork. To you and you alone, what matters is the process"
+						In the context of software, the process of creating your artwork is a
+						collaborative one, so it's definitely a little different than being a
+						solo artist, unless you're just working on a side project by yourself.
+						That said, writing tests is part of the proccess of writing software,
+						not the finished product. A user of your application doesn't care
+						about your tests as long as the product works. You should care about
+						writing tests because they will help you to build a product that works.
+						If you're a user, you'd probably rather use a product that works perfectly
+						and has no tests, but as a software developer you'd much rather use a
+						product that has some issues but is well-tested.
 					</aside>
 				</section>
 				<section>
@@ -151,7 +183,8 @@ end
 					<blockquote>Tests are the canary in the coal mine; when the design is bad, testing is hard.</blockquote>
 					<span class="attribution">— Sandi Metz, <em>Practical Object-Oriented Design in Ruby</em></span>
 					<aside class='notes'>
-						Tests can help prompt you when your code is getting too complex and help
+						Tests can
+						help prompt you when your code is getting too complex and help
 						encourage good practices. As Sandi Metz said in Practical Object-Oriented
 						Design in Ruby, "Tests are the canary in the coal mine; when design is bad,
 						testing is hard."
@@ -167,16 +200,27 @@ end
 						unit should only talk to its immediate friends. Writing unit tests
 						provides a great opportunity to test this. How much does your class
 						actually need from neighboring classes? If it's too much, then writing
-						unit tests will be more complicated.
+						unit tests will be more complicated. This is a hint to you to go back
+						and simplify the code that you're testing.
 					</aside>
 				</section>
 				<section>
 					<h3>Allowing for confidence in refactor</h3>
 					<img src='images/dangerously.jpg'>
 					<aside class='notes'>
+						Allowing for confidence in refactor. One great thing about testing
+						is that it makes refactoring possible. If you've got some code that's
+						written in a way that makes it very difficult to reason about, you
+						can't rewrite it if you can't reason about it in the first place.
+						How are you going to preserve all that functionality without knowing
+						what it is?
 						Without tests, it's impossible to make changes to your code and
-						ensure that you haven't broken other things. Efficient refactoring
-						is only possible with a well-written test suite.
+						ensure that you haven't broken other things. You are, indeed, living
+						very dangerously, because your only conception of how the code is
+						supposed to work is within your own head, and you have no way of
+						verifying that this lines up with how it actually works or how it was
+						orignally intended to work without tests.
+						Efficient refactoring is only possible with a well-written test suite.
 						This is an example of how taking the time to write good tests will
 						save you time in the future. Refactoring is a hugely important part
 						of writing good code, just as revision is an important part of writing.
@@ -200,19 +244,26 @@ end
 					</blockquote>
 					<span class="attribution">— David Bayles & Ted Orland, <em>Art & Fear</em></span>
 					<aside class='notes'>
-						There's a bit of a story behind this. My parents are both in the art
-						world, and got me this book written by a friend of theirs about being
-						a professional artist. I'm pretty sure they were hoping I'd be a
-						professional artist. I'm not. But I really love this book, called
-						Art & Fear, because I think that it's incredbily relevant to
-						programming and all sorts of creative work.
-						This quote struck me in the context of testing, because I feel like
-						it's also kind of about refactoring.
+						Here's another quote from Art & Fear. This quote struck me in the
+						context of testing, because I feel like it's also kind of about refactoring.
 						"You make good work by (among other things) making lots of work that
 						isn't very good, and gradually weeding out the parts that aren't good"
+						I think this is absolutely true about programming as well. I do most
+						of my work by just putting my fingers to the keyboard and reasoning
+						out the problem at hand in whatever manner first comes to me.
+						This is often pretty repetitive and sometimes needlessly complicated,
+						but this rough draft and starting point is essential to growth. Being
+						able to edit and make improvments to your code over time is an essential
+						part of improving as a developer.
 						But you can't remove the cruft without understanding exactly how
 						your code is supposed to work and--crucially--when it stops working.
 						That's the insight that tests give you.
+						Tests are your first chance to introspect about your code. When you
+						write tests, that gives you a chance to look through your code to
+						get a sense of how you feel about it. Are the variables well-named?
+						Is the logic clear? Do you feel like you're doing something hacky?
+						Do a gut check and make changes where you see fit. After all, you've
+						got some tests now so that shouldn't feel quite as scary.
 					</aside>
 				</section>
 				<section>
@@ -252,6 +303,7 @@ end
 							differentiated the different types of tests and what they mean.
 							You'll hear slightly different definitions from different sources.
 							These different designations are used in the Ruby on Rails guides.
+							There are unit, functional, integration, and system tests.
 
 							A unit test tests the smallest functional unit of code that it can,
 							such as a single method of a single class.
@@ -306,7 +358,49 @@ end
 						of the overhead involved. It's probably a good idea to have integration
 						tests for the most critical workflows in your app, or in the case of a
 						company, the things that would be most likely to loose you money quickly
-						if they broke.
+						if they broke. System tests can be used to test important workflows,
+						but can be slow and brittle, so should be used with caution to
+						supplement a robust unit test suite.
+					</aside>
+				</section>
+				<section>
+					<h2>Some things you can test</h2>
+					<ul>
+						<li>Return values of a method</li>
+						<pre><code>expect(2 + 2).to eq(4)</pre></code>
+						<li>Whether other methods are called</li>
+						<li>Whether a job is enqueued</li>
+						<li>If something is truthy/falsey</li>
+						<li>If an exception is thrown</li>
+						<img src='images/test.png' style="height: 200px; padding-left: 10%">
+					</ul>
+					<aside class='notes'>
+						Here are some things that you can check for in your tests. This is
+						by no means an exhaustive list, and there's plenty of documentation
+						to be found online on how to test different things.
+						The most important thing to keep in mind as you start testing is to
+						keep things simple. Each test should only look at one very small
+						thing.
+						Each of the bullet points I've listed above, and the most common one,
+						at least for me, I've given an example of. They're examples of what
+						are called assertions. You are establishing an idea of what your code
+						should do, and when you run the test the computer will tell you if
+						it actually does it or not.
+						I've added in an example of using RSpec to run a few tests in just
+						a simple irb console. You can see that when I run the first test, it
+						passes, and when I change the return value, the test fails, so the
+						failure message includes the expectation that was not met, the
+						expected value and the actual value.
+						For example, you can test the exact value of a return value.
+						Incidentally you can also use array matching, greater than, less
+						than, includes, the whole deal. You can make sure that a method
+						causes another method to be called, you can check that a job is
+						enqueued, you can check that a database object is created or
+						destroyed, you can see if something is truthy or falsey, or whether
+						running a particular bit of code throws and exception and the
+						content of that exception.
+						This is by no means an exhaustive list, but instead meant to get you
+						thinking about how you might write unit tests for your methods.
 					</aside>
 				</section>
 				<section>
@@ -327,7 +421,9 @@ describe '#greet' do
   end
 end</code></pre>
 					<aside class='notes'>
-						A unit test looks at the smallest possible unit of code. In the case
+						What, exactly, is a unit test.
+
+						As we noted, a unit test looks at the smallest possible unit of code. In the case
 						of Ruby, that's a single method on a single class. In unit testing a method,
 						you should think about all the reasonable inputs to that function, as well as
 						how the method should respond to invalid inputs. If your method uses branching
@@ -335,7 +431,8 @@ end</code></pre>
 						branch or combination of branches.
 
 						Here's an example of how I might approach unit testing this method that I
-						wrote called "greet." It takes someone's name and says hello to them. If it
+						wrote called "greet."    (BREATHE)
+						It takes someone's name and says hello to them. If it
 						gets a weird input, like a number or anything that's not a string, it just
 						says hello and mentions it didn't catch the name. That's a design decision
 						on my part, I could also throw an exception or just call to_s no matter what.
@@ -351,11 +448,30 @@ end</code></pre>
 						in a single method. I've written a simple test for each of the possible
 						conditions in this case.
 
+						I've written two unit tests, one that calls the method using an
+						expected input... this is something you might see called a happy
+						path. I call the method using my name, and it says "Hi Valerie!"
+						I apologize for having to use a ternary operator here, which I did
+						so I could fit everything on the slide, but the basic idea is that
+						it's just an if/else statement with the if part behind the question
+						mark, the return value for if after that, and the return value for
+						the else clause after the colon.
+
+						My test is looking to make sure that the method does in fact return
+						"Hi Valerie!" when I call the method using my name.
+
+						I also have a test for the else case in which I pass a number and make
+						sure I get the message indicating that it didn't catch my name.
+
 						The site betterspecs has tons of resources on the style in which you can
-						write your test descriptions and structure your tests, which I won't get
-						into here, but it's a great resource. The idea is that well-written tests
-						will read like a sentence, and when the test suite runs, you'll have a
-						printed record of exactly what the test was doing.
+						write your test descriptions and structure your tests.
+
+						The same principles of readability that apply to your code are probably
+						even more important in your test. An English speaker who doesn't know
+						Ruby should be able to read your test and have an idea of what it is
+						doing. In RSpec, things are named very deliberately to allow for this.
+						And the less readable your code is, the more straightforward your tests
+						should be, although both should be as straightforward as possible.
 					</aside>
 				</section>
 				<section>
@@ -363,7 +479,8 @@ end</code></pre>
 					<aside class='notes'>
 						So we've talked about what's good about tests and why you should write
 						them, but we've probably all been or will be in situations where
-						test-writing is skipped or overlooked. Why is that?
+						test-writing is skipped or overlooked. Why is that? What is it that
+						makes testing hard or causes it to be passed over?
 					</aside>
 				</section>
 				<section>
@@ -388,6 +505,10 @@ end</code></pre>
 						in one deliberate way you are slowing down your deploy process. This
 						can make it more frustrating to push urgent fixes through, especially
 						if those tests take a long time to run or have spurious failures.
+
+						You can also mitigate this by writing fast tests (such as unit tests
+						over integration tests), keeping those tests simple, and using tools
+						like Zeus to load tests faster.
 
 						Testing anything that involves time can also be challenging. What
 						if you want to check that a time stamp was correctly recorded, but
@@ -429,6 +550,16 @@ end</code></pre>
 
 						Are you fixing a bug? Stop. Before you fix it, write a test that
 						exposes it and fails. Now go fix the code and turn it green.
+
+						Are you writing a method? Make sure that you have a test (a separate
+						test) for every branch of its conditionals. Think about edge cases
+						(the method gets passed a nil value, a string instead of a number,
+						a negative number, zero, a really big number). Think about the ways
+						you want that method to behave in those conditions and write tests
+						to validate that behavior.
+
+						Favor tests over comments as a means of explaining your code to
+						future engineers.
 
 						Get everyone on your team to agree that testing is important, agree
 						on a strategy. You can use tools like coveralls to give you feedback
