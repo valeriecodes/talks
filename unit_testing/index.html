@@ -26,27 +26,63 @@
 		<div class='reveal'>
 			<div class='slides'>
 				<section data-background='images/kermit_bike.gif'>
-					<h2 style='color:#fff'>How I Learned to Stop Worrying and Love Unit Testing</h2>
+					<h2 style='color:#fff; -webkit-text-stroke: 2px black;'>How I Learned to Stop Worrying and Love Unit Testing</h2>
 					<aside class='notes'>
 						Hello and welcome to my talk on unit testing. I'm Valerie Woolard
 						Srinivasan, I'm a software engineer at Panoply, where I help build
 						tools for your favorite podcasts. Find me in the hallway later or
 						on Twitter, my handle is valeriecodes, for podcast recommendations,
 						but right now we're going to talk about testing.
+						Before we get into the talk, I also want to take a moment to
+						appreciate our location in the beautiful city of New Orleans and to
+						borrow an Austrialian tradition called the acknowledgement of country,
+						I take time to acknowledge the Choctaw, Houma, and other tribes, the
+						traditional custodians of this land and pay respects to their elders
+						past and present, and I extend that respect to other indigenous people
+						who are present.
+						Thank you for taking the time to appreciate their contributions to
+						this land and this culture with me, and for coming to attend this talk.
+						Let's get started.
+						I'm happy to be kicking off the testing track, I hope that this can
+						teach you something if you're already doing testing and to give you
+						an idea of where to start if it's something new to you.
+						I chose this gif of Kermit the frog, partly because I love Kermit
+						the frog and it made me laugh.
+						But the other reason is that I love the carefree nature shown here.
+						I think that a lot of the power of testing is confidence. Good tests
+						allow you to be confident that you won't accidentally break something.
+						Good tests allow you to change code and verify that it works the same
+						way it did before. Good tests let you worry less. Maybe they don't let
+						you be as care-free as Kermit, but they come close.
 					</aside>
 				</section>
 				<section>
 					<h2>What are tests for?</h2>
+					<img src='images/alice.png'>
 					<aside class='notes'>
 						Let's start right off the bat with: What are tests even for in the
 						first place? Some of you may be fairly new to software and just know
 						that testing is probably something you should do without knowing why.
+						I talked a little bit about confidence, and one way you can think
+						about tests is as an act of kindness. When you write a test, you are
+						taking the time to verify that your code works. This is a favor to
+						your teammates and your future self. Think of it as an investment.
+						Coming into a new codebase or starting on a new project often feels
+						familiar in certain ways, it may be a language you're familiar with
+						or a type of application that you've built before, but there are gaps,
+						like playing croquet with a flamingo and a hedgehog. Your old
+						assumptions may not hold true, and you have to figure out where the
+						gaps are between your understanding and reality.
+						Tests help bridge that gap.
 					</aside>
 				</section>
 				<section>
 					<h3>Protecting against bugs</h3>
 					<img src='images/bug.png'>
 					<aside class='notes'>
+						The first and perhaps most obvious function of tests is protecting against
+						bugs, or at least catching those bugs before they make their way to
+						production.
 						The software that you're working on is likely to be a very complex
 						system. You're probably not going to be the only one modifying it,
 						and it's not going to be possible to understand or keep track of
@@ -91,6 +127,13 @@ end
 						</code></pre>
 					</span>
 					<aside class='notes'>
+						Another great asset that tests can provide for you is documentation.
+						You may be more familiar with writing documentation in the form of
+						comments or internal wikis, but that can get out of date quickly
+						and cause trouble. For example, here I've written a method that
+						returns 4 and a comment explaining it. However, if I change the
+						return value of the method, the comment remains, as a terrible,
+						blatant lie.
 						If you're using continuous integration, tests have to be updated
 						when they fail, so they are more likely to reflect the current
 						state of the codebase than comments.
@@ -100,7 +143,7 @@ end
 						yourself!) misleading information about the actual state of the code.
 						Good tests can serve as an introduction to your code. Well-written tests,
 						along with well-named functions and variables,should explain the
-						desired behavior of your code as well as testing
+						desired behavior of your code as well as testing its functionality.
 					</aside>
 				</section>
 				<section>
@@ -108,6 +151,10 @@ end
 					<blockquote>Tests are the canary in the coal mine; when the design is bad, testing is hard.</blockquote>
 					<span class="attribution">— Sandi Metz, <em>Practical Object-Oriented Design in Ruby</em></span>
 					<aside class='notes'>
+						Tests can help prompt you when your code is getting too complex and help
+						encourage good practices. As Sandi Metz said in Practical Object-Oriented
+						Design in Ruby, "Tests are the canary in the coal mine; when design is bad,
+						testing is hard."
 						Writing tests as you write your code will help give you an idea of
 						where the complexities in your code are. If you are not sure how to
 						test a method, that method might be too complex and need to be
@@ -131,92 +178,43 @@ end
 						ensure that you haven't broken other things. Efficient refactoring
 						is only possible with a well-written test suite.
 						This is an example of how taking the time to write good tests will
-						save you time in the future.
+						save you time in the future. Refactoring is a hugely important part
+						of writing good code, just as revision is an important part of writing.
+						Remember in high school when you were writing an essay, and as soon as
+						you got to the right word count you just hit print and handed it in.
+						I was always terrified to re-read them because I was worried I'd
+						find a mistake and go back and have to do a bunch of work.
+						This isn't really a sustainable way to work, especially in the
+						context of a code base. Writing code without tests is a lot like
+						this. You're not only depriving yourself of the chance to introspect
+						a bit more about the code you've just written while it's fresh in
+						your mind, you're also depriving future developers or more insight
+						into how your code is supposed to work and how to tell if it is
+						working. This knowledge is essential to making changes later.
 					</aside>
 				</section>
 				<section>
-					<h2>What makes testing hard?</h2>
+					<blockquote>
+						You make good work by (among other things) making lots of work that
+						isn't very good, and gradually weeding out the parts that aren't good
+					</blockquote>
+					<span class="attribution">— David Bayles & Ted Orland, <em>Art & Fear</em></span>
 					<aside class='notes'>
-						So we've talked about what's good about tests and why you should write
-						them, but we've probably all been or will be in situations where
-						test-writing is skipped or overlooked. Why is that?
+						There's a bit of a story behind this. My parents are both in the art
+						world, and got me this book written by a friend of theirs about being
+						a professional artist. I'm pretty sure they were hoping I'd be a
+						professional artist. I'm not. But I really love this book, called
+						Art & Fear, because I think that it's incredbily relevant to
+						programming and all sorts of creative work.
+						This quote struck me in the context of testing, because I feel like
+						it's also kind of about refactoring.
+						"You make good work by (among other things) making lots of work that
+						isn't very good, and gradually weeding out the parts that aren't good"
+						But you can't remove the cruft without understanding exactly how
+						your code is supposed to work and--crucially--when it stops working.
+						That's the insight that tests give you.
 					</aside>
 				</section>
-				<section>
-					<h3>Time</h3>
-					<ul>
-						<li>Developer time</li>
-						<li>Computational time</li>
-						<li>The passage of time</li>
-					</ul>
-					<aside class='notes'>
-						Writing tests takes time. The first time you're writing something,
-						you're probably testing it manually in a development environment.
-						You've already convinced yourself that it works, and it seems
-						straightforward enough. Why write automated tests? That takes time
-						that you could be spending writing your next feature.
-
-						Tests also take time to run. By configuring a continous deployment
-						environment in which you have to run tests before you deploy new code,
-						in one deliberate way you are slowing down your deploy process. This
-						can make it more frustrating to push urgent fixes through, especially
-						if those tests take a long time to run or have spurious failures.
-
-						Testing anything that involves time can also be challenging. What
-						if you want to check that a time stamp was correctly recorded, but
-						fractions of a second elapse between the time the object is saved and
-						the test is run? What if your test server is on a different time
-						zone than your development and production environments?
-
-						These issues can be mitigated by using gems like Timecop, which
-						allow you to freeze time in your testing environment.
-
-						The final aspect of time that can be difficult is knowing at what
-						point in the process to write your tests, and if you're waiting to
-						write them until the end or trying to write them long after writing
-						the code under test, it can be hard to remember what you were doing
-						an what things are most important to test.
-
-						Even if you're not using true test-driven development, you should be
-						writing tests alongside your code, and writing out an idea of what
-						you want your tests to look like before you begin writing code can be
-						a helpful exercise in thinking about how to structure your code.
-					</aside>
-				</section>
-				<section>
-					<h3>Not knowing where to start</h3>
-					<aside class='notes'>
-						If you're faced with an app or codebase with no tests, it's daunting
-						to try and figure out where to even start testing it.
-						Instead of taking on the monumental task of writing tons of tests
-						at once, instead make sure that every new piece of code that you add
-						is well-tested. Choose a testing framework and use tools to get an
-						idea of your test coverage. Chip away at it. Use the Boy Scout rule
-						and leave the code cleaner and better-tested than you found it with
-						every pull request.
-					</aside>
-				</section>
-				<section>
-					<h3>External systems</h3>
-					<aside class='notes'>
-						Let's say that your code makes a call to an external API and then
-						parses that response. It's inefficient and clunky to actually make
-						that call every time you run your test, so what can you do?
-						You have a few options. You can mock out a valid response in your
-						tests and just make sure that you are doing the correct operations
-						on it.
-						You can use a tool like Webmock to construct fake HTTP responses,
-						or a tool like VCR to make a real request once and record the result,
-						performing all future tests from the recording.
-						Keep in mind that both of these methods rely on the current state or
-						your interpretation of the current state of the API response format,
-						and that if that changes it may break your live app but not your tests.
-					</aside>
-				</section>
-				<!-- <section>
-					<h3>Interdependence</h3>
-					<aside class='notes'>As we discussed b</aside>
-				</section> -->
 				<section>
 					<h2>A Good Test Suite</h2>
 					<ul>
@@ -224,6 +222,9 @@ end
 						<li>Doesn't fail otherwise</li>
 					</ul>
 					<aside class='notes'>
+						These are the things tests can do for you, but what makes a good
+						test? Obviously not all tests are created equal, so what
+						differentiates them?
 						A good test suite really only has to do two things. It needs to
 						break when code that you've changed has broken your app, and not
 						break otherwise. Both of these things are much easier said than
@@ -309,7 +310,164 @@ end
 					</aside>
 				</section>
 				<section>
-					<h1>Questions?</h1>
+					<h2>What is a unit test?</h2>
+					<pre><code>class Person
+  def greet(name)
+    name.instance_of?(String) ? "Hi #{name}!" : "Hi! Didn't catch your name."
+  end
+end
+
+describe '#greet' do
+  it 'contructs greeting based on string passed as name' do
+    expect(Person.new.greet('Valerie')).to eq('Hello Valerie!')
+  end
+
+  it 'doesn\'t catch names for numbers' do
+    expect(Person.new.greet(2)).to eq('Hi! Didn\'t catch your name.')
+  end
+end</code></pre>
+					<aside class='notes'>
+						A unit test looks at the smallest possible unit of code. In the case
+						of Ruby, that's a single method on a single class. In unit testing a method,
+						you should think about all the reasonable inputs to that function, as well as
+						how the method should respond to invalid inputs. If your method uses branching
+						or conditional logic, you should have a unit test that hits each possible
+						branch or combination of branches.
+
+						Here's an example of how I might approach unit testing this method that I
+						wrote called "greet." It takes someone's name and says hello to them. If it
+						gets a weird input, like a number or anything that's not a string, it just
+						says hello and mentions it didn't catch the name. That's a design decision
+						on my part, I could also throw an exception or just call to_s no matter what.
+
+						The code examples here use rspec, but the general ideas should be applicable
+						to whatever testing framework you're using.
+
+						Because I have two possible conditions in my return values, I need at least
+						two unit tests. If I wanted to be especially thorough, I might test for other
+						edge cases, like different types of non-string input. You can see how if you
+						have lots of branching logic this can multiply and get complicated quickly,
+						so let that serve as yet another incentive not to nest too many conditionals
+						in a single method. I've written a simple test for each of the possible
+						conditions in this case.
+
+						The site betterspecs has tons of resources on the style in which you can
+						write your test descriptions and structure your tests, which I won't get
+						into here, but it's a great resource. The idea is that well-written tests
+						will read like a sentence, and when the test suite runs, you'll have a
+						printed record of exactly what the test was doing.
+					</aside>
+				</section>
+				<section>
+					<h2>What makes testing hard?</h2>
+					<aside class='notes'>
+						So we've talked about what's good about tests and why you should write
+						them, but we've probably all been or will be in situations where
+						test-writing is skipped or overlooked. Why is that?
+					</aside>
+				</section>
+				<section>
+					<h3>Time</h3>
+					<ul>
+						<li>Developer time</li>
+						<li>Computational time</li>
+						<li>The passage of time</li>
+					</ul>
+					<aside class='notes'>
+						A lot of these challenges boil down to time. Developer time,
+						computational time, and the passage of time.
+
+						Writing tests takes time. The first time you're writing something,
+						you're probably testing it manually in a development environment.
+						You've already convinced yourself that it works, and it seems
+						straightforward enough. Why write automated tests? That takes time
+						that you could be spending writing your next feature.
+
+						Tests also take time to run. By configuring a continous deployment
+						environment in which you have to run tests before you deploy new code,
+						in one deliberate way you are slowing down your deploy process. This
+						can make it more frustrating to push urgent fixes through, especially
+						if those tests take a long time to run or have spurious failures.
+
+						Testing anything that involves time can also be challenging. What
+						if you want to check that a time stamp was correctly recorded, but
+						fractions of a second elapse between the time the object is saved and
+						the test is run? What if your test server is on a different time
+						zone than your development and production environments?
+
+						These issues can be mitigated by using gems like Timecop, which
+						allow you to freeze time in your testing environment.
+
+						The final aspect of time that can be difficult is knowing at what
+						point in the process to write your tests, and if you're waiting to
+						write them until the end or trying to write them long after writing
+						the code under test, it can be hard to remember what you were doing
+						an what things are most important to test.
+
+						We tend to overestimate our own abilities to remember things, and you
+						are likely to forget the context for your code and decisions very soon
+						after you're done writing.
+
+						Even if you're not using true test-driven development, you should be
+						writing tests alongside your code, and writing out an idea of what
+						you want your tests to look like before you begin writing code can be
+						a helpful exercise in thinking about how to structure your code.
+					</aside>
+				</section>
+				<section>
+					<h3>Not knowing where to start</h3>
+					<aside class='notes'>
+						If you're faced with an app or codebase with no tests, it's daunting
+						to try and figure out where to even start testing it.
+
+						Instead of taking on the monumental task of writing tons of tests
+						at once, instead make sure that every new piece of code that you add
+						is well-tested. Choose a testing framework and use tools to get an
+						idea of your test coverage. Chip away at it. Use the Boy Scout rule
+						and leave the code cleaner and better-tested than you found it with
+						every pull request.
+
+						Are you fixing a bug? Stop. Before you fix it, write a test that
+						exposes it and fails. Now go fix the code and turn it green.
+
+						Get everyone on your team to agree that testing is important, agree
+						on a strategy. You can use tools like coveralls to give you feedback
+						about what code is and isn't covered by your test suite. Once you have
+						a starting point, you can set a goal, for example to increase code
+						coverage by 5%. You can decide that all PRs need to include tests in
+						order to be merged.
+					</aside>
+				</section>
+				<section>
+					<h3>External systems</h3>
+					<aside class='notes'>
+						Let's say that your code makes a call to an external API and then
+						parses that response. It's inefficient and clunky to actually make
+						that call every time you run your test, so what can you do?
+						You have a few options. You can mock out a valid response in your
+						tests and just make sure that you are doing the correct operations
+						on it.
+						You can use a tool like Webmock to construct fake HTTP responses,
+						or a tool like VCR to make a real request once and record the result,
+						performing all future tests from the recording.
+						Keep in mind that both of these methods rely on the current state or
+						your interpretation of the current state of the API response format,
+						and that if that changes it may break your live app but not your tests.
+					</aside>
+				</section>
+				<section data-background='images/kermit_typing.gif'>
+					<h2 style='color:#fff; -webkit-text-stroke: 2px black;'>Go forth and conquer</h2>
+					<aside class='notes'>
+						I hope this talk has given you some ideas for how to start testing
+						if you haven't already, and has given you some ideas and things to
+						think about in terms of your test suite if it's something you're
+						doing already.
+
+						Feel free to find me later or on Twitter with any questions, and if
+						you're interested in working for my company, Panoply, we are hiring
+						and I'd be happy to chat about that as well.
+						Go forth and conquer!
+					</aside>
 				</section>
 				<div class='twitter-handle'>@valeriecodes</a>
 			</div>
