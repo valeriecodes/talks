@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/serif.css">
+		<link rel="stylesheet" href="../css/custom_styles.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class='reveal'>
+			<div class='slides'>
+				<section>
+					<h3>Logging off: Improving Low-Connectivity Experiences on the Web</h3>
+					<aside class='notes'>
+						Hello and welcome to my talk on improving low-connectivity experiences
+						on the web. I'm Valerie Woolard Srinivasan, I work as a software engineer
+						at Panoply, and I'd be happy to offer podcast recommendations if you catch
+						me in the hallway later. But first I want to talk a little about the internet.
+					</aside>
+				</section>
+
+				<section>
+					<h1>The Internet!</h1>
+					<ul>
+						<li>73% of adults in the United States have high-speed internet access at home</li>
+						<li>10% of Americans lack access to broadband, 39% in rural areas</li>
+						<li>12% of Americans have smartphones but no broadband, 27% of people making under $30k</li>
+						<li>54% of households worldwide have internet access</li>
+					</ul>
+					<p>facts via Pew Research Center, FCC, and ITU</p>
+					<aside class='notes'>
+						We all love the internet. We've wasted many hours online. I'm willing to guess
+						that most people in this room have access to a reliable internet connection on
+						a regular basis, whether that's at home, at work, or both. The FCC defines high speed
+						internet as a connection with a speed of 25 megabits per second or higher.
+						As of a year ago, 73% of adults in the United States had high-speed internet
+						access at home. That's a good percentage, but it still leaves out a lot of people.
+						According to the FCC, 10 percent of Americans lack access to broadband. That is,
+						it's not available to them to purchase. This can be especially pronounced in rural areas.
+						In rural areas, 39 percent of people lack access to broadband. 20 percent of people in
+						rural areas lack access to internet speeds of at least 4 megabits per second, which is
+						more than 5 times slower than what is officially considered "high-speed." 41 percent of
+						people living on tribal lands lack high-speed internet access, 66 percent of people living
+						in US territories, and 98 percent of people living in rural areas in US territories.
+						Twelve percent of adults don't have high speed internet but do use smartphones. Twenty-one
+						percent of adults making under $30,000 a year fall into this category.
+						And we're just talking about the United States here. High speed internet is, of course, not
+						at all equally distributed throughout the globe. The International Telecommunication Union
+						2017 report estimates that 53.6 percent of households worldwide have internet access, only
+						42.9 percent in developing countries, 14.7 percent in least developed countries, and 84.4
+						percent in developed countries.
+						So, perhaps it goes without saying that the more forgiving your applications or websites are
+						to people who have slow or limited internet access, the more people will be able to use them,
+						opening up additional possibilities for viewers or customers from around the globe.
+						It's also worth noting the regional and economic variations in internet accessibility, and
+						keeping in mind that internet speed could be a hurdle to people in lower income brackets or
+						from rural areas using your site.
+						These facts are all via the Pew Research Institute, the Federal Communications Commission, and
+						the International Telecommunication Union, which is an agency of the United Nations. I'll have
+						links in the presentation when I post it which I'd encourage you to dig into more if you're
+						interested.
+					</aside>
+				</section>
+				<section>
+					<h3>Types of limited-connectivity users</h3>
+					<ul>
+						<li>Intermittent connection</li>
+						<li>Slow connection</li>
+						<li>Bandwidth-limited connection</li>
+						<li>Sporadic (time-limited) connection</li>
+					</ul>
+					<aside class='notes'>
+						Let's talk about the different types of ways people can be internet-limited.
+						People may fall into multiple of these categories, and they may not be
+						permanent or apply to all of the ways in which a person accesses the
+						internet.
+						First, there's the intermittent connection. This could be a fixed internet
+						access point that is unreliable due to service providers or weather. It
+						could also be a user who is using their phone to access the internet on
+						the metro and going in and out of service areas. In these cases, the phone
+						or computer may even think it is connected to a network, but packets are not
+						actually being delivered.
+						Next, there's the slow connection, where a reliable connection exists, but it
+						may be much slower than what we're used to, making it difficult to load websites
+						with lots of rich content or background scripts.
+						There's also the bandwidth-limited connection, which again we're probably much
+						more familiar with on our phone, but also exist on home internet plans. Some
+						users may be limited to a certain number of gigabytes of data use a month,
+						making them have a much higher awareness of how much bandwidth their internet
+						use habits are actually consuming.
+						Some people may also have sporadic or time-limited connections, which I've
+						differentiated from intermittent connections in that they are more predictable,
+						such as a person who only connects to the internet when at work or a library,
+						but may want to save or cache content for use later.
+					</aside>
+				</section>
+				<section data-background='images/mountains.jpg'>
+					<aside class='notes'>
+						For example, here's a picture taken near my parents' house. As you might guess, they are part
+						of that statistic that lacks access to high speed internet. There are no fiber or DSL lines up
+						here. What there is is a clear view of the southern sky, so they get satellite internet with a top
+						speed of 5 Megabits per second for probably more than some of you pay for your much cushier plans.
+						To top it off, they also have bandwidth caps that limit their total data usage to 10 gigabytes a
+						month.
+					</aside>
+				</section>
+				<section>
+					<img src='images/plans.png' style='height:600px;'>
+					<aside class='notes'>
+						Here's a full list of the internet plans from an internet provider available for my parents'
+						zip code. You'll notice that the top download speed is 5 megabits per second, which is much
+						lower than the 25 megabits per second required for the FCC's classification of high-speed.
+						You'll also notice that all of the plans have fairly low bandwidth limits, if you consider
+						that streaming a movie can easily consume a gigabyte of data.
+						My phone tracks data usage over wifi, and I looked for the last 30 days, and I had used 15
+						gigabytes of data just on my phone in the last month, with 7 gigabytes of that in my podcast
+						app. So, the bottom plan here would be sufficient for just my podcast needs on my phone. If
+						I wanted to be able to support all of the other idle browsing I do on my phone I would need
+						the middle plan. That's before you even get into the data I use on my other devices.
+						But... unlimited data usage from midnight to 5 a.m., so you can get all your downloading done
+						then. The limitiations of this plan fall into three of the categories that I mentioned in
+						the earlier slide. It is slower than we're all used to, it is bandwidth-limited, and it is
+						time-limited, in that there is a time window where it's advantageous to get most of your data
+						transfers done.
+						So with this constraints in mind, let's continue.
+					</aside>
+				</section>
+				<section>
+					<h3>Zoiks!</h3>
+					<img src='images/load_times.png'>
+					<aside class='notes'>
+						This is from a story that the New York Times did in August on 2015 entitled "The Cost of Mobile Ads
+						on 50 News Sites." It was focusing on the cost of loading these sites to mobile users, both in terms
+						of literal cost on their phone plans and money. But, as we've  seen, a lot of the challenges that
+						apply to mobile internet usage are also relevant to other limited-connectivity users.
+						It found that most news sites took longer to load ad content than editorial content, in some
+						egregious examples up to 3 times longer.
+						Given that these sites rely heab
+					</aside>
+				</section>
+				<section>
+					Ways to help
+				</section>
+				<section>
+					Offline First
+				</section>
+				<section>
+					Your Faves are Problematic
+				</section>
+				<section>
+					Low-Bandwidth guidelines
+				</section>
+				<section>
+					<h3>The Big Picture</h3>
+					<blockquote>"It's really easy [...] to
+						always want to be on the cutting edge, always working on the coolest
+						technology, but we have to remember that that's all privileged in many places"</blockquote>
+					<p class="attribution">Aaron Williams, a graphics reporter at The Washington Post</p>
+					<aside class='notes'>
+						So before we part ways I want to talk a bit more about why I think this topic is
+						important. This quote is from a story on limited connectivity users, primarily those
+						using only a phone, and their access to news sites. As you can imagine, as campabilities
+						improve to make the most complex infographics with the most flashy and iteractive features,
+						keep in mind the users that you may be leaving behind as you make those choices.
+						"It's really easy to always want to be on the cutting edge, always working on the
+						coolest technology, but we have to remember that that's all privileged in many places."
+
+						From a pure business perspective, the best way to reach more customers is to make your
+						product available and useful to more people. If your product, website, or app has a
+						billion possible users, chances are good that some of them will be in the groups we
+						talked about earlier who have limited internet access, be that due to geographic limitations,
+						economic limitations, or some combination of the two. It's also worth remembering that
+						constant and reliable internet connectivity is a privilege, and that by leaving out
+						those who don't have it, we're leaving out a specific segment of the population, largely
+						rural and/or low income.
+
+						In the last year, we've been involved in a very heated exchange around the internet's role
+						in shaping our country, our politics, and our poliicies. As we come to rely on the internet
+						more and more in our daily lives, both in our logistics and our decision-making, we need to
+						be aware of the consequences that making our tools and information inaccessible to
+						low-connectivity users has. Access to legitmate news sources was a huge issue in the last
+						election, and one that is likely to continue to loom large as time goes on.
+
+						We looked specifically here at news sites and the toll that advertising scripts can take
+						on low-connectivity users. If those users aren't able to load legitimate news sites, then we
+						have a huge problem. If services, applications, or tools are similarly unavailable to that
+						group, we have a huge problem.
+
+						Think about this and your responsibilities in this system as you develop websites and
+						design tools for the future.
+					</aside>
+				</section>
+				<section data-background='images/kermit_typing.gif'>
+					<h2 style='color:#fff; -webkit-text-stroke: 2px black;'>Go forth and conquer</h2>
+					<aside class='notes'>
+						I hope that this has given you some perspective on the world of
+						limited connectivity on the web and given you some steps that you
+						can take to improve the accessibility of what you build for
+						limited-connectivity users.
+						If nothing else, I hope I have convinced you to never ever use an
+						autoplaying video, and if that is all I've done I consider it a
+						success.
+						Feel free to find me later or on Twitter with any questions, and if
+						you're interested in working for my company, Panoply, we are hiring
+						and I'd be happy to chat about that as well.
+						Go forth and conquer!
+					</aside>
+				</section>
+				<div class='twitter-handle'>@valeriecodes</a>
+			</div>
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+			dependencies: [
+				{ src: '../plugin/markdown/marked.js' },
+				{ src: '../plugin/markdown/markdown.js' },
+				{ src: '../plugin/notes/notes.js', async: true },
+				{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+			]
+			});
+		</script>
+	</body>
+</html>

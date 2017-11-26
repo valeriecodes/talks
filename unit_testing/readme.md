@@ -1,3 +1,5 @@
+This talk was given at RubyConf 2017.
+
 Ruby on Rails Guide on testing
 
 http://guides.rubyonrails.org/testing.html

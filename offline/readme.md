@@ -1,0 +1,9 @@
+https://www.fcc.gov/reports-research/reports/broadband-progress-reports/2016-broadband-progress-report
+http://www.pewinternet.org/fact-sheet/internet-broadband/
+http://www.itu.int/en/ITU-D/Statistics/Documents/facts/ICTFactsFigures2017.pdf
+https://github.com/pazguille/offline-first
+http://royal.pingdom.com/2010/11/12/real-connection-speeds-for-internet-users-across-the-world/
+https://cost-of-modules.herokuapp.com/
+https://knightlab.northwestern.edu/2016/06/20/limited-connectivity-including-readers-whose-only-access-might-be-a-mobile-phone/
+https://modernweb.com/limit-javascript/
+https://jakearchibald.github.io/isserviceworkerready/
