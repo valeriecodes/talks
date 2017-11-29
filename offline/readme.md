@@ -7,3 +7,4 @@ https://cost-of-modules.herokuapp.com/
 https://knightlab.northwestern.edu/2016/06/20/limited-connectivity-including-readers-whose-only-access-might-be-a-mobile-phone/
 https://modernweb.com/limit-javascript/
 https://jakearchibald.github.io/isserviceworkerready/
+https://alistapart.com/article/offline-first
