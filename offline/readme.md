@@ -8,3 +8,4 @@ https://knightlab.northwestern.edu/2016/06/20/limited-connectivity-including-rea
 https://modernweb.com/limit-javascript/
 https://jakearchibald.github.io/isserviceworkerready/
 https://alistapart.com/article/offline-first
+http://www.nytimes.com/interactive/2015/10/01/business/cost-of-mobile-ads.html?_r=0
